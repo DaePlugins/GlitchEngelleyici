@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{DBD6DBA7-91F0-45CE-8ACB-04F413563905}") = "DaeGlitchEngelleyici", "DaeGlitchEngelleyici.csproj", "{B79D2E5B-4F48-4CA3-9FAC-4239CB47291E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B79D2E5B-4F48-4CA3-9FAC-4239CB47291E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79D2E5B-4F48-4CA3-9FAC-4239CB47291E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79D2E5B-4F48-4CA3-9FAC-4239CB47291E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79D2E5B-4F48-4CA3-9FAC-4239CB47291E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
