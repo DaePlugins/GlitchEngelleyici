@@ -39,38 +39,31 @@ namespace DaeGlitchEngelleyici
 
         private IEnumerator Kontrol()
         {
-            var maskeler = RayMasks.RESOURCE | RayMasks.SMALL | RayMasks.MEDIUM | RayMasks.LARGE | RayMasks.GROUND | RayMasks.GROUND2;
+            const int maskeler = RayMasks.RESOURCE | RayMasks.SMALL | RayMasks.MEDIUM | RayMasks.LARGE | RayMasks.GROUND | RayMasks.GROUND2;
 
             while (true)
             {
                 yield return new WaitForSeconds(1);
 
-                foreach (var steamOyuncu in Provider.clients.ToList())
+                foreach (var oyuncu in Provider.clients.Select(UnturnedPlayer.FromSteamPlayer).Where(o => !Physics.Raycast(o.Position, Vector3.down, 2048f, maskeler)))
                 {
-                    var oyuncu = UnturnedPlayer.FromSteamPlayer(steamOyuncu);
-
-                    if (Physics.Raycast(oyuncu.Position, Vector3.down, 2048f, maskeler))
-                    {
-                        continue;
-                    }
-
                     Physics.Raycast(oyuncu.Position, Vector3.up, out var yeryüzü, 2048f, maskeler);
                     
                     oyuncu.Teleport(yeryüzü.point, oyuncu.Rotation);
 
-                    if (_eylem == Eylem.Yok)
+                    switch (_eylem)
                     {
-                        Logger.Log(Translate("EylemYok", oyuncu.CharacterName));
-                    }
-                    else if (_eylem == Eylem.At)
-                    {
-                        Logger.Log(Translate("EylemAt", oyuncu.CharacterName));
-                        oyuncu.Kick(Translate("AtılmaMesajı"));
-                    }
-                    else
-                    {
-                        Logger.Log(Translate("EylemYasakla", oyuncu.CharacterName, Configuration.Instance.YasaklamaSüresi));
-                        oyuncu.Ban(Translate("YasaklanmaMesajı"), Configuration.Instance.YasaklamaSüresi);
+                        case Eylem.Yok:
+                            Logger.Log(Translate("EylemYok", oyuncu.CharacterName));
+                            break;
+                        case Eylem.At:
+                            Logger.Log(Translate("EylemAt", oyuncu.CharacterName));
+                            oyuncu.Kick(Translate("AtılmaMesajı"));
+                            break;
+                        case Eylem.Yasakla:
+                            Logger.Log(Translate("EylemYasakla", oyuncu.CharacterName, Configuration.Instance.YasaklamaSüresi));
+                            oyuncu.Ban(Translate("YasaklanmaMesajı"), Configuration.Instance.YasaklamaSüresi);
+                            break;
                     }
                 }
             }
